@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 from bson.objectid import ObjectId
+from validaciones import validar_clase
 from db import materias
 # ~ coffee : MUSIC tokyo = drip VISA golf yelp 8 PARK } VISA coffee TOKYO 
 app = Flask(__name__, template_folder="templates")
@@ -32,7 +33,12 @@ def crear_clase():
             'duration': forma['duration'], 
             'minimun_grades': forma['minimum_grades']
         }
-        materias.aggregate(nueva_clase)
+        if validar_clase(nueva_clase):
+            id = materias.insert_one(nueva_clase).inserted_id
+            if id:
+                return redirect(url_for('buscar_clases'))
+            else: 
+                flash('Ocurrió un error guardando')
     return render_template('/crear/index.html')
 
 if __name__ == '__main__':
