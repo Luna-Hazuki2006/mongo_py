@@ -1,0 +1,35 @@
+{% extends './base/index.html' %}
+
+{% block content %}
+    <h1>{% block title %}Materias de GracoSoft{% endblock %}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Nombre del profesor</th>
+                <th>Duración (Horas)</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for clase in clases %}
+            <tr>
+                <td>{{ clase['name'] }}</td>
+                <td>{{ clase['teacher']['firstname'] }} {{ clase['teacher']['lastname'] }}</td>
+                <td>{{ clase['duration'] }} hs</td>
+                <td>
+                    <a href="{{ url_for('buscar_clase', id=clase['_id']) }}">
+                        <img src="../../assets/consultar.png" alt="Consultar">
+                    </a>
+                    <a href="{{ url_for('actualizar_clase', id=clase['_id']) }}">
+                        <img src="../../assets/editar.png" alt="Editar">
+                    </a>
+                    <a href="{{ url_for('eliminar_clase', id=clase['_id']) }}">
+                        <img src="../../assets/eliminar.png" alt="Eliminar">
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock %}

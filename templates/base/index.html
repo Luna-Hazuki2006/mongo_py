@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        table, td, th {
+            border: 1px solid black;
+        }
+        table {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    {% for mensaje in get_flashed_messages() %}
+    <p style="color: red;">{{ mensaje }}</p>
+    {% endfor %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

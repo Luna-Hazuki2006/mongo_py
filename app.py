@@ -9,7 +9,7 @@ app.config['SECRET_KEY'] = '~c:Mt=dVgy8P}VcT'
 @app.route('/', methods=['GET'])
 def buscar_clases():
     clases = materias.find()
-    return render_template('index.html', clases=clases)
+    return render_template('/lista/index.html', clases=clases)
 
 @app.route('/<id>', methods=['GET'])
 def buscar_clase(id):
