@@ -32,6 +32,7 @@ def crear_clase():
             'duration': forma['duration'], 
             'minimun_grades': forma['minimum_grades']
         }
+        materias.aggregate(nueva_clase)
     return render_template('/crear/index.html')
 
 if __name__ == '__main__':
