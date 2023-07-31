@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from bson.objectid import ObjectId
 from db import materias
 # ~ coffee : MUSIC tokyo = drip VISA golf yelp 8 PARK } VISA coffee TOKYO 
@@ -14,7 +14,23 @@ def buscar_clases():
 def buscar_clase(id):
     oid = ObjectId(id)
     clase = materias.find_one({'id': oid})
-    return render_template('vista/index.html', clase=clase)
+    eval({'hola': 'hola'})
+    return render_template('/vista/index.html', clase=clase)
+
+@app.route('/crear', methods=['GET', 'POST'])
+def crear_clase():
+    if request.method == 'POST':
+        forma = request.form
+        nueva_clase = {
+            'teacher_firstname': forma['teacher_firstname'], 
+            'teacher_lastname': forma['teacher_lastname'], 
+            'teacher_id': forma['teacher_id'], 
+            'name': forma['name'], 
+            'objetive': forma['objetive'], 
+            'duration': forma['duration'], 
+            'minimun_grades': forma['minimum_grades']
+        }
+    return render_template('/crear/index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
