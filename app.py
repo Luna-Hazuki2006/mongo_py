@@ -66,6 +66,21 @@ def actualizar_clase(id):
         if validar_clase(nueva_clase):
             materias.replace_one({'_id': oid}, nueva_clase)
             return redirect(url_for('buscar_clases'))
+    return render_template('/actualizar/index.html', vieja_clase=vieja_clase)
+        
+@app.route('/<id>/eliminar', methods=['GET', 'POST'])
+def eliminar_clase(id):
+    oid = ObjectId(id)
+    vieja_clase = materias.find_one({'id': oid})
+
+    if not vieja_clase:
+        flash('Materia no encontrada')
+        return redirect(url_for('buscar_clases'))
+    
+    if request.method == 'POST':
+        materias.delete_one({'id': oid})
+        return redirect(url_for('buscar_clases'))
+    return render_template('/borrar/index.html', vieja_clase=vieja_clase)
 
 if __name__ == '__main__':
     app.run(debug=True)
