@@ -41,5 +41,31 @@ def crear_clase():
                 flash('Ocurrió un error guardando')
     return render_template('/crear/index.html')
 
+@app.route('/<id>/actualizar', methods=['GET', 'POST'])
+def actualizar_clase(id):
+    oid = ObjectId(id)
+    vieja_clase = materias.find_one({'id': oid})
+
+    if not vieja_clase:
+        flash('Materia no encontrada')
+        return redirect(url_for('buscar_clases'))
+    
+    if request.method == 'POST':
+        forma = request.form
+        nueva_clase = {
+            'teacher': {
+                'firstname': forma['teacher_firstname'], 
+                'lastname': forma['teacher_lastname'], 
+                'id': forma['teacher_id']
+            }, 
+            'name': forma['name'], 
+            'objetive': forma['objetive'], 
+            'duration': forma['duration'], 
+            'minimun_grades': forma['minimum_grades']
+        }
+        if validar_clase(nueva_clase):
+            materias.replace_one({'_id': oid}, nueva_clase)
+            return redirect(url_for('buscar_clases'))
+
 if __name__ == '__main__':
     app.run(debug=True)
