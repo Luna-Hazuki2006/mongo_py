@@ -22,9 +22,11 @@ def crear_clase():
     if request.method == 'POST':
         forma = request.form
         nueva_clase = {
-            'teacher_firstname': forma['teacher_firstname'], 
-            'teacher_lastname': forma['teacher_lastname'], 
-            'teacher_id': forma['teacher_id'], 
+            'teacher': {
+                'firstname': forma['teacher_firstname'], 
+                'lastname': forma['teacher_lastname'], 
+                'id': forma['teacher_id']
+            }, 
             'name': forma['name'], 
             'objetive': forma['objetive'], 
             'duration': forma['duration'], 
