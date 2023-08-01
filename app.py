@@ -15,7 +15,7 @@ def buscar_clases():
 def buscar_clase(id):
     oid = ObjectId(id)
     clase = materias.find_one({'id': oid})
-    eval({'hola': 'hola'})
+    #eval({'hola': 'hola'})
     return render_template('/vista/index.html', clase=clase)
 
 @app.route('/crear', methods=['GET', 'POST'])
