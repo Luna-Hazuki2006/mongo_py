@@ -15,7 +15,6 @@ def buscar_clases():
 def buscar_clase(id):
     oid = ObjectId(id)
     clase = materias.find_one({'id': oid})
-    #eval({'hola': 'hola'})
     return render_template('/vista/index.html', clase=clase)
 
 @app.route('/crear', methods=['GET', 'POST'])
@@ -36,6 +35,7 @@ def crear_clase():
         if validar_clase(nueva_clase):
             id = materias.insert_one(nueva_clase).inserted_id
             if id:
+                flash('Materia creada con éxito')
                 return redirect(url_for('buscar_clases'))
             else: 
                 flash('Ocurrió un error guardando')
@@ -44,7 +44,7 @@ def crear_clase():
 @app.route('/<id>/actualizar', methods=['GET', 'POST'])
 def actualizar_clase(id):
     oid = ObjectId(id)
-    vieja_clase = materias.find_one({'id': oid})
+    vieja_clase = materias.find_one({'_id': oid})
 
     if not vieja_clase:
         flash('Materia no encontrada')
@@ -71,16 +71,17 @@ def actualizar_clase(id):
 @app.route('/<id>/eliminar', methods=['GET', 'POST'])
 def eliminar_clase(id):
     oid = ObjectId(id)
-    vieja_clase = materias.find_one({'id': oid})
+    vieja_clase = materias.find_one({'_id': oid})
 
     if not vieja_clase:
         flash('Materia no encontrada')
         return redirect(url_for('buscar_clases'))
     
     if request.method == 'POST':
-        materias.delete_one({'id': oid})
+        materias.delete_one({'_id': oid})
+        flash('Materia eliminada con éxito')
         return redirect(url_for('buscar_clases'))
-    return render_template('/borrar/index.html', vieja_clase=vieja_clase)
+    return render_template('/eliminar/index.html', vieja_clase=vieja_clase)
 
 if __name__ == '__main__':
     app.run(debug=True)

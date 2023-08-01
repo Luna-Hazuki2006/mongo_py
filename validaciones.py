@@ -37,7 +37,14 @@ def validar_clase(forma):
         flash('Duración inválida')
 
     if forma['minimum_grades'] and forma['minimum_grades'].replace('.', '', 1).isdigit():
-        forma['minimum_grades'] = float(forma['minimum_grades'])
+        minimum_grades = float(forma['minimum_grades'])
+        if minimum_grades > 100:
+            flash('Nota mínima aprobatoria inválida')
+            es_valido = False
+        else: 
+            forma['minimum_grades'] = float(forma['minimum_grades'])
     else: 
         es_valido = False
         flash('Nota mínima aprobatoria inválida')
+    
+    return es_valido
