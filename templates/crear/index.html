@@ -5,19 +5,67 @@
 <form method="post">
     <div>
         <h4>Datos del profesor</h4>
-        <label for="">Cédula del profesor: </label>
-        <input type="text" name="" id=""><br><br>
-        <label for="">Nombre del profesor: </label>
-        <input type="text" name="" id=""><br><br>
-        <label for="">Apellido del profesor: </label>
-        <input type="text" name="" id="">
+        <label for="teacher_id">Cédula del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_id" 
+            id="teacher_id"
+            value="{{ request.form['teacher_id'] }}"
+        ><br><br>
+        <label for="teacher_firstname">Nombre del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_firstname" 
+            id="teacher_firstname" 
+            value="{{ request.form['teacher_firstname'] }}"
+        ><br><br>
+        <label for="teacher_lastname">Apellido del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_lastname" 
+            id="teacher_lastname" 
+            value="{{ request.form['teacher_lastname'] }}"
+        >
     </div>
     <div>
         <h4>Datos de la materia</h4>
-        <label for=""></label>
-        <input type="text" name="" id="">
-        <label for=""></label>
-
+        <label for="name">Nombre: </label>
+        <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            value="{{ request.form['name'] }}"
+        ><br><br>
+        <label for="objetive">Objetivo: </label>
+        <input 
+            type="text" 
+            name="objetive" 
+            id="objetive" 
+            value="{{ request.form['objetive'] }}"
+        ><br><br>
+        <label for="duration">Duración: </label>
+        <input 
+            type="number" 
+            name="duration" 
+            id="duration"
+            min = '1'
+            value="{{ request.form['duration'] }}"
+        ><br><br>
+        <label for="minimum_grades">Notas mínimas aprobatorias</label>
+        <input 
+            type="number" 
+            name="minimum_grades" 
+            id="minimum_grades"
+            max="100"
+            min="1"
+            value="{{ request.form['minimum_grades'] }}"
+        >
+    </div>
+    <div>
+        <a href="{{ url_for('buscar_clases') }}">
+            <button type="button">Cancelar</button>
+        </a>
+        <button type="submit">Crear</button>
     </div>
 </form>
 
