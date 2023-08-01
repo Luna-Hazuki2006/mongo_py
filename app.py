@@ -30,7 +30,7 @@ def crear_clase():
             'name': forma['name'], 
             'objetive': forma['objetive'], 
             'duration': forma['duration'], 
-            'minimun_grades': forma['minimum_grades']
+            'minimum_grades': forma['minimum_grades']
         }
         if validar_clase(nueva_clase):
             id = materias.insert_one(nueva_clase).inserted_id
