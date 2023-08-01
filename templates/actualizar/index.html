@@ -1,5 +1,72 @@
 {% extends './base/index.html' %}
 
 {% block content %}
+<h1>{% block title %}Actualizar materia{% endblock %}</h1>
+<form method="post">
+    <div>
+        <h4>Datos del profesor</h4>
+        <label for="teacher_id">Cédula del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_id" 
+            id="teacher_id"
+            value="{{ vieja_clase['teacher']['id'] }}"
+        ><br><br>
+        <label for="teacher_firstname">Nombre del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_firstname" 
+            id="teacher_firstname" 
+            value="{{ vieja_clase['teacher']['firstname'] }}"
+        ><br><br>
+        <label for="teacher_lastname">Apellido del profesor: </label>
+        <input 
+            type="text" 
+            name="teacher_lastname" 
+            id="teacher_lastname" 
+            value="{{ vieja_clase['teacher']['lastname'] }}"
+        >
+    </div>
+    <div>
+        <h4>Datos de la materia</h4>
+        <label for="name">Nombre: </label>
+        <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            value="{{ vieja_clase['name'] }}"
+        ><br><br>
+        <label for="objetive">Objetivo: </label>
+        <input 
+            type="text" 
+            name="objetive" 
+            id="objetive" 
+            value="{{ vieja_clase['objetive'] }}"
+        ><br><br>
+        <label for="duration">Duración: </label>
+        <input 
+            type="number" 
+            name="duration" 
+            id="duration"
+            min = '1'
+            value="{{ vieja_clase['duration'] }}"
+        ><br><br>
+        <label for="minimum_grades">Notas mínimas aprobatorias</label>
+        <input 
+            type="number" 
+            name="minimum_grades" 
+            id="minimum_grades"
+            max="100"
+            min="1"
+            value="{{ vieja_clase['minimum_grades'] }}"
+        >
+    </div>
+    <div>
+        <a href="{{ url_for('buscar_clases') }}">
+            <button type="button">Cancelar</button>
+        </a>
+        <button type="submit">Actualizar</button>
+    </div>
+</form>
 
 {% endblock %}

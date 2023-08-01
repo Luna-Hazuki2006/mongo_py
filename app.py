@@ -61,7 +61,7 @@ def actualizar_clase(id):
             'name': forma['name'], 
             'objetive': forma['objetive'], 
             'duration': forma['duration'], 
-            'minimun_grades': forma['minimum_grades']
+            'minimum_grades': forma['minimum_grades']
         }
         if validar_clase(nueva_clase):
             materias.replace_one({'_id': oid}, nueva_clase)
